@@ -59,7 +59,7 @@ describe('The home page', () => {
       },
     };
 
-    const { getByTestId, debug } = render(<Home todos={TEST_TODOS} />);
+    const { getByTestId } = render(<Home todos={TEST_TODOS} />);
 
     TEST_TODOS.todos.data.forEach((todo) => {
       const todoItem = getByTestId(`todo-${todo.id}`);

@@ -7,28 +7,46 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/typescript": "^2.0.0",
     "@graphql-codegen/typescript-graphql-request": "^4.0.0",
     "@graphql-codegen/typescript-operations": "^2.0.1",
+    "bootstrap": "^5.3.2",
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
-    "next": "11.0.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.15.0",
-    "@testing-library/react": "^12.0.0",
+    "@storybook/addon-essentials": "7.4.2",
+    "@storybook/addon-interactions": "7.4.2",
+    "@storybook/addon-links": "7.4.2",
+    "@storybook/addon-onboarding": "1.0.8",
+    "@storybook/blocks": "7.4.2",
+    "@storybook/nextjs": "7.4.2",
+    "@storybook/react": "7.4.2",
+    "@storybook/testing-library": "0.2.1",
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^26.0.24",
     "@types/react": "17.0.16",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.0.1",
+    "eslint-config-next": "^13.4.19",
+    "eslint-plugin-storybook": "^0.6.13",
     "jest": "^27.0.6",
+    "storybook": "7.4.2",
     "ts-jest": "^27.0.4",
     "typescript": "4.3.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }

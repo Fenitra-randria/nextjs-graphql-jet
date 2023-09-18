@@ -1,16 +1,26 @@
-import { GetServerSideProps } from 'next';
-import React, { SyntheticEvent, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { SyntheticEvent, useState , useEffect } from 'react';
 import { sdk } from '../graphql/client';
 import { Todo, TodosQuery } from '../graphql/types';
-import Head from 'next/head';
-interface HomeProps {
-  todos: TodosQuery
-}
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Home(props: HomeProps) {
+export const Page: React.FC = () => {
+
   const [title, setTitle] = useState('');
-  const [todos, setTodos] = useState<TodosQuery['todos']>(props.todos.todos)
+  const [todos, setTodos] = useState<TodosQuery['todos']>()
   
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await sdk.todos();
+        setTodos(response?.todos);
+      } catch (error) {
+        //Error getting todos
+      }
+    };
+  
+    fetchData(); // Appelez la fonction fetchData ici pour déclencher la requête
+  }, []);
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -54,11 +64,6 @@ export default function Home(props: HomeProps) {
 
   return (
     <>
-      <Head>
-        <title>Project - Test Nextjs + Jest + GraphQL</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
-      </Head>
       <div style={{ maxWidth: 700 }} className="container mt-5">
         <h1 className="mb-5 text-center">Suivi de toutes les tâches</h1>
 
@@ -90,14 +95,4 @@ export default function Home(props: HomeProps) {
       </div>
     </>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const todos = await sdk.todos() 
-
-  return {
-    props: {
-      todos
-    }
-  }
-}
+};
